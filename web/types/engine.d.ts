@@ -1,4 +1,9 @@
+// interface IZeph_MyClass {
+//     setValue: (v: number) => void;
+//     getValue: () => number;
+// }
+
 interface iZephyrus {
-    _main: () => number;
-    _sum: (number, number) => number;
+    main: (string, number, number) => number;
+    // Zeph_MyClass: new (v: number) => IZeph_MyClass;
 }

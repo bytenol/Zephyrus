@@ -5,4 +5,10 @@
 #ifndef ZEPHYRUS_PLATFORM_H
 #define ZEPHYRUS_PLATFORM_H
 
+namespace zpy {
+
+
+
+}
+
 #endif //ZEPHYRUS_PLATFORM_H

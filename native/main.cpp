@@ -4,20 +4,13 @@
 #include <cstdio>
 
 int main() {
-    // 1. Create X11 window
     Display* display = XOpenDisplay(nullptr);
     Window root = DefaultRootWindow(display);
 
     XSetWindowAttributes swa{};
     swa.event_mask = ExposureMask | KeyPressMask;
 
-    Window win = XCreateWindow(
-        display, root,
-        0, 0, 800, 600, 0,
-        CopyFromParent, InputOutput,
-        CopyFromParent,
-        CWEventMask, &swa
-    );
+    Window win = XCreateWindow(display, root,0, 0, 800, 600, 0,CopyFromParent, InputOutput,CopyFromParent, CWEventMask, &swa);
 
     XMapWindow(display, win);
     XStoreName(display, win, "Native GLES Window");
@@ -26,28 +19,17 @@ int main() {
     EGLDisplay eglDisplay = eglGetDisplay(display);
     eglInitialize(eglDisplay, nullptr, nullptr);
 
-    EGLint configAttribs[] = {
-        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES3_BIT,
-        EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-        EGL_NONE
-    };
+    EGLint configAttribs[] = { EGL_RENDERABLE_TYPE, EGL_OPENGL_ES3_BIT, EGL_SURFACE_TYPE, EGL_WINDOW_BIT, EGL_NONE};
 
     EGLConfig config;
     EGLint numConfigs;
     eglChooseConfig(eglDisplay, configAttribs, &config, 1, &numConfigs);
 
-    EGLSurface surface = eglCreateWindowSurface(
-        eglDisplay, config, win, nullptr
-    );
+    EGLSurface surface = eglCreateWindowSurface(eglDisplay, config, win, nullptr);
 
-    EGLint contextAttribs[] = {
-        EGL_CONTEXT_CLIENT_VERSION, 3,
-        EGL_NONE
-    };
+    EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE};
 
-    EGLContext context = eglCreateContext(
-        eglDisplay, config, EGL_NO_CONTEXT, contextAttribs
-    );
+    EGLContext context = eglCreateContext(eglDisplay, config, EGL_NO_CONTEXT, contextAttribs);
 
     eglMakeCurrent(eglDisplay, surface, surface, context);
 
