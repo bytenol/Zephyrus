@@ -1,9 +1,20 @@
-export default class Engine {
-    constructor(canvas: HTMLCanvasElement) {
-        // wasm.engine_init(canvas.width, canvas.height);
+export default abstract class Engine {
+
+    protected g: iZephyrus | null = null;     // core engine wasm
+
+    protected constructor(canvas: HTMLCanvasElement) {
+
     }
 
-    tick(dt: number) {
-        // wasm.engine_tick(dt);
+    abstract onCreate(): boolean;
+
+    private async init() {
+        this.g = (await Zephyrus()) as iZephyrus;
+    }
+
+    public async start(): Promise<boolean> {
+        await this.init();
+        this.onCreate();
+        return Promise.resolve(true);
     }
 }

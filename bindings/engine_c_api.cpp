@@ -8,3 +8,7 @@ int main() {
     std::cout << "Hello world from c++" << std::endl;
     return 0;
 }
+
+int sum(int a, int b) {
+    return a + b;
+}
