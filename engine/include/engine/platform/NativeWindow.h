@@ -1,0 +1,8 @@
+// GLFW + GLAD
+// Created by bytenol on 12/23/25.
+//
+
+#ifndef ZEPHYRUS_NATIVEWINDOW_H
+#define ZEPHYRUS_NATIVEWINDOW_H
+
+#endif //ZEPHYRUS_NATIVEWINDOW_H

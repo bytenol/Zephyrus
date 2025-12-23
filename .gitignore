@@ -1,3 +1,14 @@
+#C-Lion build folder
+cmake-build-debug
+
+node_modules
+
+#emscripten build
+CMakeFiles
+web/build/cmake_install.cmake
+web/build/CMakeCache.txt
+web/build/Makefile
+
 # Prerequisites
 *.d
 
