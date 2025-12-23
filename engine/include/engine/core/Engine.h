@@ -5,18 +5,19 @@
 #ifndef ZEPHYRUS_ENGINE_H
 #define ZEPHYRUS_ENGINE_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <string>
+#include "Vec2.h"
 
-    void engine_init(int width, int height);
-    void engine_tick(float dt);
-    int  entity_create();
-    void entity_set_position(int id, float x, float y);
+namespace zpy {
+    inline std::string _error;
+    inline Vec2 _windowSize;
 
-#ifdef __cplusplus
+    void setWindowSize(const int& width, const int& height);
+    Vec2 getWindowSize();
+
+    void setError(const std::string& err);
+    std::string& getError();
+
 }
-#endif
-
 
 #endif //ZEPHYRUS_ENGINE_H
