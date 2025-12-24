@@ -12,6 +12,9 @@ namespace zpy {
     inline std::string _error;
     inline Vec2 _windowSize;
 
+    inline void(*_user_mainLoop)() = nullptr;
+
+    void setMainLoop(decltype(_user_mainLoop) loopFn);
     void setWindowSize(const int& width, const int& height);
     Vec2 getWindowSize();
 

@@ -11,9 +11,16 @@
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
 
-namespace zpy {
+#include <zephyrus/core/Engine.h>
 
-    int nativeMain(const std::string& title, const int& w, const int& h);
+namespace zpy {
+    inline Display* display;
+    inline EGLDisplay eglDisplay;
+    inline EGLSurface surface;
+
+    int _nativeMain(const std::string& title, const int& w, const int& h);
+
+    void _nativeMainLoop();
 
 }
 

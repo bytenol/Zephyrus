@@ -1,7 +1,7 @@
 #include "../include/zephyrus/platform/NativeWindow.h"
 
-int zpy::nativeMain(const std::string &title, const int &w, const int &h) {
-    Display* display = XOpenDisplay(nullptr);
+int zpy::_nativeMain(const std::string &title, const int &w, const int &h) {
+    display = XOpenDisplay(nullptr);
     const Window root = DefaultRootWindow(display);
 
     XSetWindowAttributes swa{};
@@ -12,7 +12,7 @@ int zpy::nativeMain(const std::string &title, const int &w, const int &h) {
     XMapWindow(display, win);
     XStoreName(display, win, title.c_str());
 
-    const EGLDisplay eglDisplay = eglGetDisplay(display);
+    eglDisplay = eglGetDisplay(display);
     eglInitialize(eglDisplay, nullptr, nullptr);
 
     const EGLint configAttribs[] = { EGL_RENDERABLE_TYPE, EGL_OPENGL_ES3_BIT, EGL_SURFACE_TYPE, EGL_WINDOW_BIT, EGL_NONE};
@@ -21,7 +21,7 @@ int zpy::nativeMain(const std::string &title, const int &w, const int &h) {
     EGLint numConfigs;
     eglChooseConfig(eglDisplay, configAttribs, &config, 1, &numConfigs);
 
-    const EGLSurface surface = eglCreateWindowSurface(eglDisplay, config, win, nullptr);
+    surface = eglCreateWindowSurface(eglDisplay, config, win, nullptr);
 
     constexpr EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE};
 
@@ -29,6 +29,14 @@ int zpy::nativeMain(const std::string &title, const int &w, const int &h) {
 
     eglMakeCurrent(eglDisplay, surface, surface, context);
 
+    glViewport(0, 0, w, h);
+    _nativeMainLoop();
+    eglTerminate(eglDisplay);
+    XCloseDisplay(display);
+    return 0;
+}
+
+void zpy::_nativeMainLoop() {
     bool running = true;
     while (running) {
         while (XPending(display)) {
@@ -37,15 +45,7 @@ int zpy::nativeMain(const std::string &title, const int &w, const int &h) {
             if (e.type == KeyPress)
                 running = false;
         }
-
-        glViewport(0, 0, w, h);
-        glClearColor(0.1f, 0.2f, 0.4f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
+        if (_user_mainLoop) _user_mainLoop();
         eglSwapBuffers(eglDisplay, surface);
     }
-
-    eglTerminate(eglDisplay);
-    XCloseDisplay(display);
-    return 0;
 }

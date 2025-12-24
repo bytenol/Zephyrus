@@ -2,6 +2,7 @@
 #define ZEPHYRUS_PLATFORM_H
 
 #include <string>
+#include <zephyrus/core/Engine.h>
 
 #ifdef __EMSCRIPTEN__
     #include "WebCanvas.h"
@@ -12,6 +13,8 @@
 namespace zpy {
 
     int createWindow(const std::string& id, int width, int height);
+
+    int mainLoop();
 
 }
 
