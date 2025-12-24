@@ -2,7 +2,7 @@
 // Created by bytenol on 12/23/25.
 //
 #include "engine_c_api.h"
-#include "../engine/include/engine/core/Vec2.h"
+#include "../zephyrus/include/zephyrus/core/Vec2.h"
 #include <emscripten/bind.h>
 #include <iostream>
 
