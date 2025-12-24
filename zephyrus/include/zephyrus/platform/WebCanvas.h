@@ -15,7 +15,9 @@
 
 namespace zpy {
 
-    int webMain(const std::string& canvasId, const int& w, const int& h);
+    int _webMain(const std::string& canvasId, const int& w, const int& h);
+
+    void _webMainLoop();
 
 }
 
