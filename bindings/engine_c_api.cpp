@@ -9,6 +9,13 @@
 
 EMSCRIPTEN_BINDINGS(zeph_module) {
     emscripten::function("main", &zpy::webMain);
+    emscripten::function("setClearColor", &glClearColor);
+    emscripten::function("setViewport", &glViewport);
+    emscripten::function("clear", &glClear);
+
+    emscripten::constant("COLOR_BUFFER_BIT", GL_COLOR_BUFFER_BIT);
+
+    // emscripten::
 
     // emscripten::class_<zpy::MyClass>("Zeph_MyClass")   // JS name, can drop namespace here
     //     .constructor<int>()
