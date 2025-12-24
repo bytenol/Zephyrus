@@ -1,4 +1,4 @@
-#include "../include/engine/core/Engine.h"
+#include "../include/zephyrus/core/Engine.h"
 
 void zpy::setWindowSize(const int &width, const int &height) {
     _windowSize.x = static_cast<float>(width);
